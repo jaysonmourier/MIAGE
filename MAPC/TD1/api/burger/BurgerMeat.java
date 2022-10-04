@@ -8,12 +8,33 @@ public enum BurgerMeat implements Base {
 
     @Override
     public double calories_per_100g() {
-        return 0;
+        double cal = 0;
+        switch (this) {
+            case BEEF:
+                cal = 200;
+                break;
+            case WHITEFISH:
+                cal = 170;
+                break;
+            default:
+                cal = 0;
+        }
+        return cal;
     }
 
     @Override
     public double price() {
-        return 0;
+        double p = 0;
+        switch (this)
+        {
+            case BEEF:
+                p = 4;
+                break;
+            case WHITEFISH:
+                p = 6;
+                break;
+        }
+        return p;
     }
 
     @Override

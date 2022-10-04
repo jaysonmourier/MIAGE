@@ -9,16 +9,29 @@ public enum BurgerSauce implements Base {
 
     @Override
     public double calories_per_100g() {
-        return 0;
+        double cal = 0;
+        switch (this)
+        {
+            case BURGER:
+                cal = 240;
+                break;
+            case BARBECUE:
+                cal = 130;
+                break;
+            case BEARNAISE:
+                cal = 550;
+                break;
+        }
+        return cal;
     }
 
     @Override
     public double price() {
-        return 0;
+        return 1;
     }
 
     @Override
     public boolean hasUniquePrice() {
-        return false;
+        return true;
     }
 }
