@@ -20,24 +20,48 @@ public abstract class Recipe implements ComposedFood {
         return this.name;
     }
 
-    public double add(Base base, double weight)
+    public void add(Base base, double weight)
     {
         this.ingredients.add(new Ingredient(base, weight));
-        return weight;
     }
 
     @Override
     public double calories_per_100g() {
-        return 0;
+        double cal = 0;
+        for(Food f : this.ingredients)
+        {
+            cal += f.calories_per_100g();
+        }
+        return cal;
     }
 
     @Override
     public double weight() {
-        return 0;
+        double w = 0;
+        for(Food f : this.ingredients)
+        {
+            w += f.weight();
+        }
+        return w;
     }
 
     @Override
     public double price() {
-        return 0;
+        double p = 0;
+        for(Food f : this.ingredients)
+        {
+            p += f.price();
+        }
+        return p;
+    }
+
+    public String toString()
+    {
+        String str = "";
+        for(Food i : this.ingredients)
+        {
+            str += i.weight() + " ";
+        }
+        return str;
     }
 }
