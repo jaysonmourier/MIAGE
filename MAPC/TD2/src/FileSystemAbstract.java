@@ -1,6 +1,12 @@
-public abstract class FileSystemAbstract<T> implements FileSystem<T> {
+public abstract class FileSystemAbstract implements FileSystem {
     String name;
     Owner owner;
+
+    FileSystemAbstract(String name, Owner o)
+    {
+        this.name = name;
+        this.setOwner(o);
+    }
 
     @Override
     public String getName() {
@@ -16,5 +22,11 @@ public abstract class FileSystemAbstract<T> implements FileSystem<T> {
     public void setOwner(Owner o)
     {
         this.owner = o;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Name's file: '" + this.name + "' (Owned by '" + this.owner + "').";
     }
 }

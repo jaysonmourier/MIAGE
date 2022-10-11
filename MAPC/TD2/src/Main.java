@@ -12,6 +12,15 @@
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Owner jayson = new Owner("Jayson");
+        Owner clement = new Owner("Clément");
+        FileSystem rep1 = new Repertory("rep1", clement);
+        FileSystem rep2 = new Repertory("rep2", jayson);
+        FileSystem file1 = new File("fichier.txt", jayson);
+
+        // Permissions
+        System.out.println(rep1);
+        System.out.println(rep2);
+        System.out.println(file1);
     }
 }

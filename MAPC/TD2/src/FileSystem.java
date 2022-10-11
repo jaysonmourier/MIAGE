@@ -1,9 +1,9 @@
 // Component
-public interface FileSystem<T> {
+public interface FileSystem {
     String getName();
-    T getContent();
+    FileSystem getContent();
     Owner getOwner();
     int getSize();
-    void appendContent(T content);
+    void appendContent(FileSystem content);
     void setOwner(Owner o);
 }

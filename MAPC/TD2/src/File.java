@@ -1,9 +1,11 @@
-public class File<T> extends FileSystemAbstract<T> {
-    T content;
+public class File extends FileSystemAbstract {
+    File(String name, Owner o) {
+        super(name, o);
+    }
 
     @Override
-    public T getContent() {
-        return this.content;
+    public FileSystem getContent() {
+        return null;
     }
 
     @Override
@@ -12,7 +14,7 @@ public class File<T> extends FileSystemAbstract<T> {
     }
 
     @Override
-    public void appendContent(T content) {
+    public void appendContent(FileSystem content) {
 
     }
 }

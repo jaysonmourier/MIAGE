@@ -2,11 +2,15 @@
 
 import java.util.List;
 
-public class Repertory<T> extends FileSystemAbstract<T> {
+public class Repertory extends FileSystemAbstract {
     List<FileSystem> files;
 
+    Repertory(String name, Owner o) {
+        super(name, o);
+    }
+
     @Override
-    public T getContent() {
+    public FileSystem getContent() {
         return null;
     }
 
@@ -16,7 +20,7 @@ public class Repertory<T> extends FileSystemAbstract<T> {
     }
 
     @Override
-    public void appendContent(T content) {
+    public void appendContent(FileSystem content) {
 
     }
 }
