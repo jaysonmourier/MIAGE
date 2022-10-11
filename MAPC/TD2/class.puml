@@ -2,41 +2,41 @@
 'https://plantuml.com/class-diagram
 
 class Owner {
-private static List<String> names;
-    private String name;
-    public Owner(String name);
-    public String getName();
+    -private static List<String> names;
+    -private String name;
+    +public Owner(String name);
+    +public String getName();
 }
 
 interface FileSystem
 {
-    String getName();
-    FileSystem getContent();
-    Owner getOwner();
-    int getSize();
-    void appendContent(FileSystem content);
-    void setOwner(Owner o);
+    +String getName();
+    +FileSystem getContent();
+    +Owner getOwner();
+    +int getSize();
+    +void appendContent(FileSystem content);
+    +void setOwner(Owner o);
 }
 
 abstract class FileSystemAbstract {
-String name;
-    Owner owner;
-    FileSystemAbstract(String name, Owner o);
-    public String getName() ;
-    public Owner getOwner();
-    public void setOwner(Owner o);
+    -String name;
+    -Owner owner;
+    +FileSystemAbstract(String name, Owner o);
+    +public String getName() ;
+    +public Owner getOwner();
+    +public void setOwner(Owner o);
 }
 class Repertory {
-    Repertory(String name, Owner o);
-    public FileSystem getContent();
-    public int getSize();
-    public void appendContent(FileSystem content);
+    +Repertory(String name, Owner o);
+    +public FileSystem getContent();
+    +public int getSize();
+    +public void appendContent(FileSystem content);
 }
 class File {
-    File(String name, Owner o);
-    public FileSystem getContent();
-    public int getSize();
-    public void appendContent(FileSystem content);
+    +File(String name, Owner o);
+    +public FileSystem getContent();
+    +public int getSize();
+    +public void appendContent(FileSystem content);
 }
 
 FileSystem <|.. FileSystemAbstract
