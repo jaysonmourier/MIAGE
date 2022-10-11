@@ -1,3 +1,5 @@
-MAPC/TD1/.idea
+*.zip
+*.iml
+*.idea
 MAPC/TD1/out
-MAPC/TD1/TD1.iml
+MAPC/TD2/out
