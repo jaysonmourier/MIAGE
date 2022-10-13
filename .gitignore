@@ -1,5 +1,15 @@
 *.zip
 *.iml
 *.idea
+
 MAPC/TD1/out
 MAPC/TD2/out
+
+# GRADLE
+gradle
+gradlew
+gradlew.bat
+.gradle
+build
+build.gradle
+settings.gradle
