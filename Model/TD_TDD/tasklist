@@ -1,0 +1,7 @@
+[X] 1 - Créer la classe DictionaryTest
+[X] 2 - Créer le test 'testDictionaryName'
+[X] 3 - Créer la classe Dictionary
+[X] 4 - Créer la méthode getName
+[X] 5 - Créer le test 'testDictionaryEmpty'
+[X] 6 - Créer la méthode isEmpty
+[]  7 - Implémenter le traitement du dictionnaire
