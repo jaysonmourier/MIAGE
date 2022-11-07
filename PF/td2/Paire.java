@@ -6,4 +6,7 @@ public class Paire<T,U> { public T fst;
         this.snd = snd; }
     @Override public String toString() {
         return String.format("(%s,%s)",fst.toString(),snd.toString());
-    } }
+    }
+
+
+}

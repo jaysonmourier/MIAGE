@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class Main {
@@ -84,12 +81,50 @@ public class Main {
         Predicate<Double> poidCorrect = (x) -> !poidTropLourd.test(x);
         Predicate<Paire<Integer, Double>> accessAutorise = (x) -> tailleCorrect.test(x.fst) && poidCorrect.test(x.snd);
 
+        Predicate<Paire<Integer, Double>> tailleTP = x -> x.fst < 100;
+        Predicate<Paire<Integer, Double>> tailleTG = x -> x.fst > 200;
+        Predicate<Paire<Integer, Double>> tailleIC = x -> tailleTP.test(x) || tailleTG.test(x);
+        Predicate<Paire<Integer, Double>> tailleC = x -> !tailleIC.test(x);
+        Predicate<Paire<Integer, Double>> poidTL = x -> x.snd > 150.0;
+        Predicate<Paire<Integer, Double>> poidC = x -> !poidTL.test(x);
+
         Paire<Integer, Double> test1 = new Paire(180, 75.0);
         Paire<Integer, Double> test2 = new Paire(180, 365.0);
 
         System.out.println("test1 = " + accessAutorise.test(test1));
         System.out.println("test2 = " + accessAutorise.test(test2));
         /*****/
+
+        /** Q2 **/
+        List<Predicate<Paire<Integer, Double>>> predicats = new ArrayList<>();
+        List<Paire<Integer, Double>> paires = new ArrayList<>();
+        paires.add(new Paire<Integer, Double>(180, 45.0));
+        paires.add(new Paire<Integer, Double>(160, 55.0));
+        paires.add(new Paire<Integer, Double>(200, 456.0));
+        paires.add(new Paire<Integer, Double>(145, 40.0));
+
+        predicats.add(tailleC);
+        predicats.add(poidC);
+
+        Predicate fpredicate = Main.aggregatePredicate(predicats);
+        System.out.printf("final test = " + fpredicate.test(new Paire<Integer, Double>(180, 452.0)));
+        /*****/
         /*****/
     }
+
+    public static <T> Predicate<T> aggregatePredicate(List<Predicate<T>> predicates)
+    {
+        if(predicates.size() < 1) return null;
+        else if(predicates.size() < 2) return predicates.get(0);
+
+        Iterator<Predicate<T>> iterator = predicates.iterator();
+        Predicate f = iterator.next();
+        while(iterator.hasNext())
+        {
+            f = f.and(iterator.next());
+        }
+
+        return f;
+    }
+
 }
