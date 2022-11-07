@@ -110,6 +110,10 @@ public class Main {
         System.out.printf("final test = " + fpredicate.test(new Paire<Integer, Double>(180, 452.0)));
         /*****/
         /*****/
+
+        /** EXERCICE 3 **/
+
+        /*****/
     }
 
     public static <T> Predicate<T> aggregatePredicate(List<Predicate<T>> predicates)
