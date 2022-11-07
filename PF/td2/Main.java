@@ -1,3 +1,8 @@
+import td2.universite.Matiere;
+import td2.universite.Annee;
+import td2.universite.UE;
+import td2.universite.Etudiant;
+
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -111,9 +116,7 @@ public class Main {
         /*****/
         /*****/
 
-        /** EXERCICE 3 **/
-
-        /*****/
+        Main.exercice3();
     }
 
     public static <T> Predicate<T> aggregatePredicate(List<Predicate<T>> predicates)
@@ -129,6 +132,79 @@ public class Main {
         }
 
         return f;
+    }
+
+    public static void exercice3()
+    {
+        Matiere m1 = new Matiere("MAT1");
+        Matiere m2 = new Matiere("MAT2");
+        UE ue1 = new UE("UE1", Map.of(m1, 2, m2, 2));
+        Matiere m3 = new Matiere("MAT3");
+        UE ue2 = new UE("UE2", Map.of(m3, 1));
+        Annee a1 = new Annee(Set.of(ue1, ue2));
+        Etudiant e1 = new Etudiant("39001", "Alice", "Merveille", a1); e1.noter(m1, 12.0);
+        e1.noter(m2, 14.0);
+        e1.noter(m3, 10.0);
+        System.out.println(e1);
+        Etudiant e2 = new Etudiant("39002", "Bob", "Eponge", a1); e2.noter(m1, 14.0);
+        e2.noter(m3, 14.0);
+        Etudiant e3 = new Etudiant("39003", "Charles", "Chaplin", a1); e3.noter(m1, 18.0);
+        e3.noter(m2, 5.0);
+        e3.noter(m3, 14.0);
+
+        Predicate<Etudiant> aDEF = x -> x.notes().size() < 3;
+        Predicate<Etudiant> noteEliminatoire = x -> {
+            for(Map.Entry<Matiere, Double> entry : x.notes().entrySet())
+            {
+                if(entry.getValue() < 6.0) return true;
+            }
+            return false;
+        };
+
+        Predicate<Etudiant> pasLaMoyenneV1 = x -> moyenne(x, aDEF) < 10;
+
+        Predicate<Etudiant> pasLaMoyenneV2 = x -> {
+            Double m = moyenne(x, aDEF);
+            if(m == null) return true;
+            else return m < 10;
+        };
+
+
+        Main.afficheSi("**Les défaillants\n", aDEF, a1);
+        Main.afficheSi("**ETUDIANTS AVEC NOTE ELIMINATOIRE\n", noteEliminatoire, a1);
+        Main.afficheSi("**ETUDIANTS PAS LA MOYENNE\n", pasLaMoyenneV2, a1);
+    }
+
+    public static void afficheSi(final String entete, Predicate<Etudiant> predicate, Annee annee)
+    {
+        Etudiant tmp;
+        List<Etudiant> etudiants = new ArrayList<>();
+        etudiants.addAll((Collection) annee.etudiants());
+        System.out.println(entete);
+        for(int i = 0; i < etudiants.size(); ++i)
+        {
+            tmp = etudiants.get(i);
+            if(predicate.test(tmp))
+            {
+                System.out.println(tmp);
+            }
+        }
+    }
+
+    public static Double moyenne(Etudiant etudiant, Predicate predicate)
+    {
+        if(predicate.test(etudiant)) return null;
+        Double s=0.0;
+        Integer c=0;
+        for (UE ue : etudiant.annee().ues()) {
+            for (Map.Entry<Matiere, Integer> ects : ue.ects().entrySet()) {
+                Matiere matiere = ects.getKey();
+                Integer credits = ects.getValue();
+                s += etudiant.notes().get(matiere) * credits;
+                c += credits;
+            }
+        }
+        return s/c;
     }
 
 }
