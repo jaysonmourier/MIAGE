@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,6 +75,15 @@ public class Main {
         /*****/
 
         /** EXERCICE 2 **/
+        /** Q1 **/
+        Predicate<Integer> tailleTropPetite = (x) -> x < 100;
+        Predicate<Integer> tailleTropGrande = (x) -> x > 200;
+        Predicate<Integer> tailleIncorrect = (x) -> !(tailleTropPetite.test(x) || tailleTropGrande.test(x));
+        Predicate<Integer> tailleCorrect = (x) -> !tailleIncorrect.test(x);
+        Predicate<Integer> poidTropLourd = (x) -> x > 150.0;
+        Predicate<Integer> poidCorrect = (x) -> !poidTropLourd.test(x);
+        Predicate<Integer> accessAutorise = (x) -> tailleCorrect.test(x) && poidCorrect.test(x);
+        /*****/
         /*****/
     }
 }
