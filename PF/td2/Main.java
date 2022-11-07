@@ -78,11 +78,17 @@ public class Main {
         /** Q1 **/
         Predicate<Integer> tailleTropPetite = (x) -> x < 100;
         Predicate<Integer> tailleTropGrande = (x) -> x > 200;
-        Predicate<Integer> tailleIncorrect = (x) -> !(tailleTropPetite.test(x) || tailleTropGrande.test(x));
+        Predicate<Integer> tailleIncorrect = (x) -> tailleTropPetite.test(x) || tailleTropGrande.test(x);
         Predicate<Integer> tailleCorrect = (x) -> !tailleIncorrect.test(x);
-        Predicate<Integer> poidTropLourd = (x) -> x > 150.0;
-        Predicate<Integer> poidCorrect = (x) -> !poidTropLourd.test(x);
-        Predicate<Integer> accessAutorise = (x) -> tailleCorrect.test(x) && poidCorrect.test(x);
+        Predicate<Double> poidTropLourd = (x) -> x > 150.0;
+        Predicate<Double> poidCorrect = (x) -> !poidTropLourd.test(x);
+        Predicate<Paire<Integer, Double>> accessAutorise = (x) -> tailleCorrect.test(x.fst) && poidCorrect.test(x.snd);
+
+        Paire<Integer, Double> test1 = new Paire(180, 75.0);
+        Paire<Integer, Double> test2 = new Paire(180, 365.0);
+
+        System.out.println("test1 = " + accessAutorise.test(test1));
+        System.out.println("test2 = " + accessAutorise.test(test2));
         /*****/
         /*****/
     }
