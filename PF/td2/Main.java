@@ -52,8 +52,28 @@ public class Main {
         System.out.println("l2s => " + l2s.apply(strList));
         System.out.println("m2s => " + m2s.apply(m));
         /*****/
+
         /** QUESTION 3 **/
 
+        // Function: Convertie (map) un type vers un autre. Lambda avec une variable
+        //           Argument: Oui (type: T)
+        //           Retour: Oui (type: R)
+
+        // Predicate: Tests l’argument selon un critère et renvoie vrai ou faux. Stockage Lambda expression
+        //           Argument: Oui (type: T)
+        //           Retour: Oui (type: boolean)
+
+        // Consume: Consume une entrée et ne retourne rien
+        //           Argument: Oui (type: T)
+        //           Retour: Non
+
+        // Supplier: Générer une sortie
+        //           Argument: Non
+        //           Retour: Oui (type: T)
+
+        /*****/
+
+        /** EXERCICE 2 **/
         /*****/
     }
 }
