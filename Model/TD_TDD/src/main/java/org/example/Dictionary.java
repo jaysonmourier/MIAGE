@@ -31,6 +31,6 @@ public class Dictionary {
     public String getTranslation(String word)
     {
         if(this.dictionary.containsKey(word)) return this.dictionary.get(word);
-        return "";
+        return null;
     }
 }
