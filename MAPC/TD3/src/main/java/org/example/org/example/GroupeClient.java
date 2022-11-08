@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 public class GroupeClient implements PrePostVisitable, Visitable {
     private String name;
@@ -24,7 +25,15 @@ public class GroupeClient implements PrePostVisitable, Visitable {
 
     @Override
     public void accept(PrePostVisitor prePostVisitor) {
-        throw new UnsupportedOperationException();
+        prePostVisitor.preVisit(this);
+
+        Iterator<Client> it = this.clients.iterator();
+        Client client = it.next();
+        while(it.hasNext()) {
+            client.accept(prePostVisitor);
+        }
+
+        prePostVisitor.postVisit(this);
     }
 
     @Override

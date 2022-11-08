@@ -1,7 +1,10 @@
 package org.example;
 
+import java.util.Collection;
+
 public class Client implements PrePostVisitable, Visitable {
     private String name;
+    private Collection<Commande> commandes;
 
     Client(String name) {
         this.name = name;
@@ -17,11 +20,16 @@ public class Client implements PrePostVisitable, Visitable {
 
     @Override
     public void accept(PrePostVisitor prePostVisitor) {
-        throw new UnsupportedOperationException();
+        prePostVisitor.preVisit(this);
+
     }
 
     @Override
     public void accept(Visitor visitor) {
         throw new UnsupportedOperationException();
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
