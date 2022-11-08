@@ -4,8 +4,7 @@
 *.iml
 *.idea
 
-MAPC/TD1/out
-MAPC/TD2/out
+out/
 
 # GRADLE
 gradle
