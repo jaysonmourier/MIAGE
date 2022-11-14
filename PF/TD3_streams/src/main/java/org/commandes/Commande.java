@@ -1,4 +1,4 @@
-package td1.commandes;
+package org.commandes;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,8 @@ import java.util.function.Function;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import td1.paires.Paire;
+import org.paires.Paire;
+import org.paires.Paire;
 
 public class Commande {
     private List<Paire<Produit, Integer>> lignes;

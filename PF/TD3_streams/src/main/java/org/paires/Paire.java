@@ -1,4 +1,4 @@
-package td3.paires;
+package org.paires;
 
 public class Paire<A,B> {
     private A _fst;

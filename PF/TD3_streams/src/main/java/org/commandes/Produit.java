@@ -1,4 +1,4 @@
-package td1.commandes;
+package org.commandes;
 
 public class Produit {
     private String nom;

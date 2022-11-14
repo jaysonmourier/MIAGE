@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
 
-import static td1.commandes.Categorie.*;
-import td1.paires.Paire;
+import static org.commandes.Categorie.*;
+import org.paires.Paire;
 
 public class DAO {
     private List<Commande> commandes;
