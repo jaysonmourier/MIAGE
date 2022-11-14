@@ -1,10 +1,8 @@
 package org.commandes;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 
 import static org.commandes.Categorie.*;
 import org.paires.Paire;
@@ -57,6 +55,18 @@ public class DAO {
                 .collect(Collectors.toSet());
     }
 
+    public Set<Produit> produitsNoStreams() {
+        Set<Produit> tmp = new TreeSet<>();
+
+        for(Commande commande : this.commandes) {
+            for(Paire<Produit, Integer> paire: commande.lignes()) {
+                tmp.add(paire.fst());
+            }
+        }
+
+        return tmp;
+    }
+
     /**
      * liste des commandes vérifiant un prédicat
      */
@@ -64,6 +74,16 @@ public class DAO {
         return commandes.stream()
             .filter(p)
             .collect(Collectors.toList());
+    }
+
+    public List<Commande> selectionCommandeNoStreams(Predicate<Commande> p) {
+        List<Commande> tmp = new ArrayList<>();
+        for(Commande commande : this.commandes) {
+            if(p.test(commande)) {
+                tmp.add(commande);
+            }
+        }
+        return tmp;
     }
 
     /**
@@ -75,6 +95,19 @@ public class DAO {
             .collect(Collectors.toList());
     }
 
+    public List<Commande> selectionCommandeSurExistanceLigneNoStreams(Predicate<Paire<Produit,Integer>> p) {
+        List<Commande> tmp = new ArrayList<>();
+        for(Commande commande : this.commandes) {
+            for(Paire<Produit, Integer> paire : commande.lignes()) {
+                if(p.test(paire)) {
+                    tmp.add(commande);
+                    break;
+                }
+            }
+        }
+        return tmp;
+    }
+
     /**
      * ensemble des différents produits commandés vérifiant un prédicat
      */
@@ -83,6 +116,19 @@ public class DAO {
             .stream()
             .filter(p)
             .collect(Collectors.toSet());
+    }
+
+    public Set<Produit> selectionProduitsNoStreams(Predicate<Produit> p) {
+        Set<Produit> tmp = new TreeSet<>();
+        for(Commande commande : this.commandes) {
+            for(Paire<Produit, Integer> paire : commande.lignes()) {
+                Produit produit = paire.fst();
+                if(p.test(produit)) {
+                    tmp.add(produit);
+                }
+            }
+        }
+        return tmp;
     }
 
 }
