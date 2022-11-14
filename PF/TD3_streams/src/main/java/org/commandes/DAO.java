@@ -1,4 +1,4 @@
-package td1.commandes;
+package org.commandes;
 
 import java.util.List;
 import java.util.Set;
