@@ -36,6 +36,24 @@ public class main {
     public static final Paire<Double, Integer> zero = new Paire<>(0.0, 0);
 
     public static final Function<Etudiant, List<Paire<Double, Integer>>> notesPonderees = e -> {
+        return matieresE.apply(e).map(matiere -> new Paire(matiere.nom(), e.notes().get(matiere.nom()))).collect(Collectors.toList());
+    };
+
+    public static final Function<Etudiant, List<Paire<Double, Integer>>> notesPondereesIndicatives = e -> {
+        return matieresE.apply(e).map(matiere -> new Paire(matiere.nom(), e.notes().get(matiere.nom()))).collect(Collectors.toList());
+    };
+
+    public static final Function<List<Paire<Double, Integer>>, Paire<Double, Integer>> reduit = l -> {
+      return l.stream().reduce(new Paire<Double, Integer>(0.0, 0), (a, b) -> new Paire<>(a.fst() + b.fst(), a.snd() + b.snd()));
+    };
+
+    public static final Function<Paire<Double, Integer>, Double> divise = p -> {
+        return p.fst() / p.snd();
+    };
+
+    public static final Function<Etudiant, Double> moyenne = e -> (e == null || aDef.test(e)) ? null : computeMoyenne.apply(e);
+
+    public static final Function<Etudiant, Double> computeMoyenneIndicative =  e -> {
         return null;
     };
 
