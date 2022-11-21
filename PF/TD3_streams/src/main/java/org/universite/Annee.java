@@ -1,7 +1,9 @@
-package td3.universite;
+package org.universite;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class Annee {
     private Set<UE> ues;

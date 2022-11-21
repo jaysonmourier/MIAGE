@@ -1,4 +1,4 @@
-package td3.universite;
+package org.universite;
 
 public class Matiere {
     private String nom;

@@ -1,4 +1,4 @@
-package td3.universite;
+package org.universite;
 
 import java.util.HashMap;
 import java.util.Map;

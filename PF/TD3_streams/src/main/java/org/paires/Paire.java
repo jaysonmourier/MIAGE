@@ -1,5 +1,9 @@
 package org.paires;
 
+import org.universite.Matiere;
+
+import java.util.Map;
+
 public class Paire<A,B> {
     private A _fst;
     private B _snd;
