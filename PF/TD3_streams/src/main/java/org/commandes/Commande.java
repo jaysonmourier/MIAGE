@@ -1,18 +1,19 @@
 package org.commandes;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.paires.Paire;
 
 public class Commande {
     private List<Paire<Produit, Integer>> lignes;
+    private Function<Paire<Produit, Integer>, String> formatteur;
 
     public Commande() {
         this.lignes = new ArrayList<>();
+        this.formatteur = x -> formatteurLigne(x);
     }
 
     public Commande ajouter(Produit p, int q) {
@@ -26,12 +27,7 @@ public class Commande {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append("Commande\n");
-        for (Paire<Produit, Integer> ligne : lignes) {
-            str.append(String.format("%s x%d\n", ligne.fst(), ligne.snd()));
-        }
-        return str.toString();
+        return lignes.stream().map(elt -> this.formatteur.apply(elt)).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -56,10 +52,31 @@ public class Commande {
         return commandeNormalisee;
     }
 
+    public Commande normaliserRefactor() {
+        Commande commandeNormalisee = new Commande();
+        regrouper(lignes()).forEach((a, b) -> {
+            commandeNormalisee.ajouter(a, b.stream().reduce(0, (subtotal, element) -> subtotal + element));
+        });
+        return commandeNormalisee;
+    }
+
     public Double cout(Function<Paire<Produit,Integer>,Double> calculLigne) {
         return normaliser().lignes.stream()
                 .map(l -> calculLigne.apply(l))
                 .reduce(0.0, (x,y) -> x+y);       
+    }
+
+    public <T, U> Map<T, List<U>> regrouper(List<Paire<T, U>> lignes) {
+        Map<T, List<U>> mapA = new HashMap();
+        for (Paire<T, U> paire : lignes) {
+            if(mapA.containsKey(paire.fst())) {
+                mapA.get(paire.fst()).add(paire.snd());
+            } else {
+                mapA.put(paire.fst(), new ArrayList<>());
+                mapA.get(paire.fst()).add(paire.snd());
+            }
+        }
+        return mapA;
     }
 
     public String affiche(Function<Paire<Produit, Integer>, Double> calculLigne) {
@@ -83,4 +100,16 @@ public class Commande {
         return str.toString();
     }
 
+    // question 2 : les streams
+    public static String formatteurLigne(Paire<Produit, Integer> paire) {
+        return "N: " + paire.snd() + ", Nom : " + paire.fst().nom() + ", prix : " + paire.fst().prix();
+    }
+
+    public Function<Paire<Produit, Integer>, String> getFormatteur() {
+        return formatteur;
+    }
+
+    public void setFormatteur(Function<Paire<Produit, Integer>, String> formatteur) {
+        this.formatteur = formatteur;
+    }
 }
