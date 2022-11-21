@@ -26,7 +26,7 @@ public class Main {
 
         //System.out.println(r);
 
-        System.out.println(commande2.normaliserRefactor());
+        System.out.println(commande2.normaliser());
 
         //System.out.println(commande2);
     }
