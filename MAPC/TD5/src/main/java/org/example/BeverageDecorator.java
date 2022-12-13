@@ -1,14 +1,18 @@
 package org.example;
 
 public abstract class BeverageDecorator implements Beverage {
-    private Beverage wrapper;
+    protected Beverage wrappee;
+
+    public BeverageDecorator(Beverage beverage) {
+        this.wrappee = beverage;
+    }
     @Override
     public String getDescription() {
         return null;
     }
 
     @Override
-    public Integer cost() {
-        return null;
+    public float cost() {
+        return this.wrappee.cost();
     }
 }

@@ -1,13 +1,14 @@
 package org.example;
 
 public class DarkRoast implements Beverage {
+    private float value = 3f;
     @Override
     public String getDescription() {
-        return null;
+        return "DarkRoast (" + this.value + "€)";
     }
 
     @Override
-    public Integer cost() {
-        return null;
+    public float cost() {
+        return this.value;
     }
 }
